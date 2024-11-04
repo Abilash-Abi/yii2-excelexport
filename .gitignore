@@ -2,3 +2,6 @@
 composer.lock
 /vendor
 .vimrc
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
