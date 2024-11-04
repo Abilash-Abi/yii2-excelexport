@@ -13,9 +13,9 @@ class ExcelFile extends BaseObject
 {
     /**
      * @var string the writer class to use. Default is
-     * `\PhpOffice\PhpSpreadsheet\Writer\Xlsx`.
+     * `\PHPExcel_Writer_Excel2007`.
      */
-    public $writerClass = '\PhpOffice\PhpSpreadsheet\Writer\Xlsx';
+    public $writerClass = '\PHPExcel_Writer_Excel2007';
 
     /**
      * @var array options to pass to the constructor of \mikehaertl\tmp\File,
@@ -33,7 +33,7 @@ class ExcelFile extends BaseObject
     protected $_sheetsCreated = false;
 
     /**
-     * @return \PhpOffice\PhpSpreadsheet\Writer\BaseWriter the writer instance
+     * @return PHPExcel_Writer_Abstract the writer instance
      */
     public function getWriter()
     {
@@ -45,12 +45,12 @@ class ExcelFile extends BaseObject
     }
 
     /**
-     * @return \PhpOffice\PhpSpreadsheet\Spreadsheet the workbook instance
+     * @return PHPExcel the workbook instance
      */
     public function getWorkbook()
     {
         if ($this->_workbook === null) {
-            $this->_workbook = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+            $this->_workbook = new \PHPExcel();
         }
         return $this->_workbook;
     }
@@ -152,7 +152,8 @@ class ExcelFile extends BaseObject
     {
         if (!$this->_fileCreated) {
             $this->createSheets();
-            $this->getWriter()->save((string) $this->getTmpFile());
+            $this->getTmpFile();
+            $this->getWriter()->save('test.xls');
             $this->_fileCreated = true;
         }
     }
